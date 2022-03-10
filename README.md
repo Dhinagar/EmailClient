@@ -7,5 +7,5 @@ do npm install where package.json file is there.
 run the command "npm start"
 Login with any credentials and check sidebar and navebar styles
 click button compose mail and send some mails and we can see sent mails in sent Mail Folder.
-once we delete this mail it will move to draft.
+once we delete this mail it will move to trash.
 click logout it will go login page.
