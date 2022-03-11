@@ -1,17 +1,12 @@
 import React from "react";
 import {
     Box,
-    Center,
     Text,
     InputGroup,
-    InputLeftElement,
     Input,
-    Select,
     Button,
     VStack,
     HStack,
-    Image,
-    useToast,
     Flex, SimpleGrid,
     Icon,
     IconButton,
@@ -77,17 +72,25 @@ const MailBox = () => {
         setvals()
     }
     React.useEffect(() => {
+        setvals()
+        setPageHeadingCount(getEmails().length)
+    }, []);
+    const refreshEmail = () => {
+        if (pageHeading === "Inbox" || pageHeading === "Send Mail") {
+            setEmails(inboxeEmails)
+        } else if (pageHeading === "Trash") {
+            setEmails(deletedataArray)
+        }
+
+    }
+    const setvals = () => {
+
         setEmails(getEmails())
         setInboxEmails(getEmails())
         setDeleteDataArray(getDeletedEmails())
         setInboxcount(getEmails().length)
         setDeleteCount(getDeletedEmails().length)
-    }, []);
-    const setvals = () => {
-        setEmails(getEmails())
-        setDeleteDataArray(getDeletedEmails())
-        setInboxcount(getEmails().length)
-        setDeleteCount(getDeletedEmails().length)
+
     }
 
 
@@ -115,7 +118,7 @@ const MailBox = () => {
                     borderBottomRightRadius={0}
 
                 />
-                {/* <Box width={["100%"]} bgColor="lightgreen"> */}
+
                 <Flex w={"100%"} >
 
                     <Box h={"88vh"} width={["100%", "30%"]} bgColor="lightgray" >
@@ -260,8 +263,8 @@ const MailBox = () => {
                                                 color="green"
                                                 borderRadius={0}
                                                 borderWidth={1}
-                                            // isDisabled={isbuttonDisplay}
-                                            // onClick={() => { addDomain() }}
+                                                // isDisabled={isbuttonDisplay}
+                                                onClick={() => { setvals(); refreshEmail() }}
                                             >
                                                 Refresh
                                             </Button>
@@ -361,9 +364,7 @@ const MailBox = () => {
 
                             </Flex>
                         </HStack >
-                        {
-                            console.log("emails.......", emails)
-                        }
+
                         {
                             emails && emails.map((e, i) => (
                                 <Box width="100%" h={10} borderWidth={1} borderColor="lightgray">
